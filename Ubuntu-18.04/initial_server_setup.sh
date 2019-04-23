@@ -72,3 +72,26 @@ fi
 # Add exception for SSH and then enable UFW firewall
 ufw allow OpenSSH
 ufw --force enable
+
+# Install ZSH
+sudo apt update && sudo apt install zsh
+zsh —version
+sudo usermod -s /usr/bin/zsh $(whoami)
+Y
+zsh
+2
+sudo apt update && sudo apt install powerline fonts-powerline zsh-theme-powerlevel9k
+Y
+
+zsh
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+rm -rf ~/.zshrc
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+
+echo "source /usr/share/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
+
+#TODO nacti custom zshrc
+#TODO nacti custom zpreztorc
